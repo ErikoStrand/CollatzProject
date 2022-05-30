@@ -5,7 +5,7 @@ import time
 # "{0:.0%}".format(data["lost"]/data["total"])
 
 bg = (200, 200, 200)
-box_color = (180, 180, 180)
+box_color = (0, 0, 0)
 input_box = pygame.Rect(100, 100, 140, 32)
 jumps = 0
 max_jump = 0
@@ -21,7 +21,7 @@ screen = pygame.display.set_mode((1600, 600))
 screen.fill(bg)
 def display(x, y, text, value):
     # clear # left top width height2
-    pygame.draw.rect(screen, bg, (x, y, 1600, 50))
+    pygame.draw.rect(screen, bg, (x, y, 600, 50))
     draw = font.render(text + value, False, (0, 0, 0))
     screen.blit(draw, (x, y))
 
@@ -52,6 +52,7 @@ def collatz():
             jumps += 1
             collatz_numbers.append(num)
 
+        pygame.draw.circle(screen, box_color, (0 + jumps * 10, 500 - num/100), 5)
         display(50, 100, "MAX: ", str(int(max(collatz_numbers))))
         display(50, 150, "Total Jumps: ", str(int(jumps)))
         display(50, 200, "Max Jump: ", str(int(max_jump)))
@@ -73,6 +74,7 @@ while 1:
                 if number_input == "":
                     pass
                 else:
+                    pygame.draw.rect(screen, bg, (0, 350, 1600, 250))
                     collatz()
 
 
